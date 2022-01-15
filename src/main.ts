@@ -123,7 +123,7 @@ async function run() {
     
 
 
-  } catch (error: Error) {
+  } catch (error: any) {
     core.setFailed(error.message);
   }
 }
