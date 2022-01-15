@@ -90,7 +90,7 @@ async function run() {
 
     // Get source rpm name , to provide file name, path as output
     let myOutput = '';
-    await cp.exec('ls /github/home/rpmbuild/SRPMS/', (err, stdout, stderr) => {
+    await cp.exec('ls /github/home/rpmbuild/SRPMS/', (err: Error, stdout: string, stderr: string) => {
       if (err) {
         //some err occurred
         console.error(err)
@@ -123,7 +123,7 @@ async function run() {
     
 
 
-  } catch (error) {
+  } catch (error: Error) {
     core.setFailed(error.message);
   }
 }
