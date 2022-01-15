@@ -50,6 +50,7 @@ async function run() {
     await exec.exec(`cp ${specFile.srcFullPath} ${specFile.destFullPath}`);
 
     // Make the code in /github/workspace/ into a tar.gz, located in /github/home/rpmbuild/SOURCES/
+    await exec.exec(`rm -rf /github/home/rpmbuild/SOURCES`);
     await exec.exec(`cp /github/workspace/SOURCES/halog.1 /github/home/rpmbuild/SOURCES/`);
     await exec.exec(`cp /github/workspace/SOURCES/haproxy.cfg /github/home/rpmbuild/SOURCES/`);
     await exec.exec(`cp /github/workspace/SOURCES/haproxy.logrotate /github/home/rpmbuild/SOURCES/`);
