@@ -50,10 +50,7 @@ async function run() {
     await exec.exec(`cp ${specFile.srcFullPath} ${specFile.destFullPath}`);
 
     // Make the code in /github/workspace/ into a tar.gz, located in /github/home/rpmbuild/SOURCES/
-    const oldGitDir = process.env.GIT_DIR;
-    process.env.GIT_DIR = '/github/workspace/.git';
-    await exec.exec(`git archive --output=/github/home/rpmbuild/SOURCES/${name}-${version}.tar.gz --prefix=${name}-${version}/ HEAD`);
-    process.env.GIT_DIR = oldGitDir;
+    await exec.exec(`cp /github/workspace/${configPath}/ /github/home/rpmbuild/SOURCES/`);
 
     // Download source files
     try {
