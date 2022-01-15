@@ -55,6 +55,15 @@ async function run() {
     await exec.exec(`git archive --output=/github/home/rpmbuild/SOURCES/${name}-${version}.tar.gz --prefix=${name}-${version}/ HEAD`);
     process.env.GIT_DIR = oldGitDir;
 
+    // Download source files
+    try {
+      await exec.exec(
+        `spectool -g -C /github/home/rpmbuild/SOURCES/ ${specFile.destFullPath}`
+      );
+    } catch (err) {
+      core.setFailed(`action failed with error: ${err}`);
+    }
+
     // Install BuildRequires
     try {
       await exec.exec(
