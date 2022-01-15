@@ -55,6 +55,15 @@ async function run() {
     await exec.exec(`git archive --output=/github/home/rpmbuild/SOURCES/${name}-${version}.tar.gz --prefix=${name}-${version}/ HEAD`);
     process.env.GIT_DIR = oldGitDir;
 
+    // Install BuildRequires
+    try {
+      await exec.exec(
+        `yum-builddep -y ${specFile.destFullPath}`
+      );
+    } catch (err) {
+      core.setFailed(`action failed with error: ${err}`);
+    }
+
     // Execute rpmbuild , -ba generates both RPMS and SPRMS
     try {
       await exec.exec(
