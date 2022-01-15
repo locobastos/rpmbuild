@@ -12,7 +12,7 @@ RUN yum install -y git rpmdevtools epel-release
 RUN curl -O https://nodejs.org/dist/v17.3.1/node-v17.3.1-linux-x64.tar.xz
 
 # Extract and install
-RUN tar --strip-components 1 -xvf node-v* -C /usr/local
+RUN tar --strip-components 1 -xf node-v* -C /usr/local
 
 # Install dependecies and build main.js
 RUN npm install --production && npm run-script build
