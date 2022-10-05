@@ -1,11 +1,11 @@
 # Using CentOS 7 as base image to support rpmbuild (packages will be Dist el7)
-FROM centos:7
+FROM almalinux:8-minimal
 
 # Copying all contents of rpmbuild repo inside container
 COPY . .
 
 # Installing tools needed for rpmbuild, other tools have to be added on BuildRequires field in specfile.
-RUN yum install -y git rpmdevtools epel-release
+RUN dnf install -y git rpmdevtools epel-release
 
 # Setting up node to run our JS file
 # Download Node Linux binary
